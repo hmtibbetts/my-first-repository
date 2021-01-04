@@ -1,0 +1,206 @@
+---
+title: "MIS581 Portfolio Project"
+author: "Hailey Tibbetts"
+date: "1/4/2021"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Import Dataset
+
+Nutrition__Physical_Activity__and_Obesity_._Women__Infant__and_Child <- read.csv("~/Desktop/Classwork/Nutrition__Physical_Activity__and_Obesity_-_Women__Infant__and_Child.csv")
+View(Nutrition__Physical_Activity__and_Obesity_._Women__Infant__and_Child)
+dim(Nutrition__Physical_Activity__and_Obesity_._Women__Infant__and_Child)
+df<-Nutrition__Physical_Activity__and_Obesity_._Women__Infant__and_Child
+install.packages("PANDA")
+full<-df
+
+#Subset by category
+
+new<-data.frame(full$LocationAbbr, full$Question, full$Data_Value)
+View(new)
+subset(new, new$full.Question=='Percent of WIC children aged 2 to 4 years who have an overweight classification	')
+subset(new, new$full.Question=='Percent of WIC children aged 2 to 4 years who have an overweight classification')
+overweight<-subset(new, new$full.Question=='Percent of WIC children aged 2 to 4 years who have an overweight classification')
+View(overweight)
+infant<-subset(new, new$full.Question=='Percent of WIC children aged 3-23 months old who have a high weight-for-length')
+obesity<-subset(new, new$full.Question=='Percent of WIC children aged 2 to 4 years who have obesity')
+rowsum(overweight$full.LocationAbbr=='AK')
+View(obesity)
+
+#Tables
+table(full$LocationAbbr, full$Question)
+locationvsquestion<-table(full$LocationAbbr, full$Question)
+locationvsrace<-table(full$LocationAbbr, full$Race.Ethnicity)
+locationvsrace
+valuevsstate<-table(full$LocationAbbr, full$Data_Value)
+valuevsstate
+barplot(table(full$Question))
+data.frame(full$LocationAbbr, full$Question, full$Data_Value)
+
+#Separating by state
+
+ak<-subset(obesity, obesity$full.LocationAbbr=='AL')
+ak<-subset(obesity, obesity$full.LocationAbbr=='AK')
+aL<-subset(obesity, obesity$full.LocationAbbr=='AL')
+ar<-subset(obesity, obesity$full.LocationAbbr=='AR')
+az<-subset(obesity, obesity$full.LocationAbbr=='AZ')
+ca<-subset(obesity, obesity$full.LocationAbbr=='CA')
+co<-subset(obesity, obesity$full.LocationAbbr=='CO')
+ct<-subset(obesity, obesity$full.LocationAbbr=='CT')
+dc<-subset(obesity, obesity$full.LocationAbbr=='DC')
+de<-subset(obesity, obesity$full.LocationAbbr=='DE')
+fl<-subset(obesity, obesity$full.LocationAbbr=='FL')
+ga<-subset(obesity, obesity$full.LocationAbbr=='GA')
+gu<-subset(obesity, obesity$full.LocationAbbr=='GU')
+hi<-subset(obesity, obesity$full.LocationAbbr=='HI')
+ia<-subset(obesity, obesity$full.LocationAbbr=='IA')
+id<-subset(obesity, obesity$full.LocationAbbr=='ID')
+il<-subset(obesity, obesity$full.LocationAbbr=='IL')
+in<-subset(obesity, obesity$full.LocationAbbr=='IN')
+indi<-subset(obesity, obesity$full.LocationAbbr=='IN')
+ks<-subset(obesity, obesity$full.LocationAbbr=='KS')
+ky<-subset(obesity, obesity$full.LocationAbbr=='KY')
+la<-subset(obesity, obesity$full.LocationAbbr=='LA')
+ma<-subset(obesity, obesity$full.LocationAbbr=='MA')
+md<-subset(obesity, obesity$full.LocationAbbr=='MD')
+me<-subset(obesity, obesity$full.LocationAbbr=='ME')
+mi<-subset(obesity, obesity$full.LocationAbbr=='MI')
+mn<-subset(obesity, obesity$full.LocationAbbr=='MN')
+mo<-subset(obesity, obesity$full.LocationAbbr=='MO')
+ms<-subset(obesity, obesity$full.LocationAbbr=='MS')
+mt<-subset(obesity, obesity$full.LocationAbbr=='MT')
+nc<-subset(obesity, obesity$full.LocationAbbr=='NC')
+nd<-subset(obesity, obesity$full.LocationAbbr=='ND')
+ne<-subset(obesity, obesity$full.LocationAbbr=='NE')
+nh<-subset(obesity, obesity$full.LocationAbbr=='NH')
+nj<-subset(obesity, obesity$full.LocationAbbr=='NJ')
+nm<-subset(obesity, obesity$full.LocationAbbr=='NM')
+nv<-subset(obesity, obesity$full.LocationAbbr=='NV')
+ny<-subset(obesity, obesity$full.LocationAbbr=='NY')
+oh<-subset(obesity, obesity$full.LocationAbbr=='OH')
+ok<-subset(obesity, obesity$full.LocationAbbr=='OK')
+or<-subset(obesity, obesity$full.LocationAbbr=='OR')
+pa<-subset(obesity, obesity$full.LocationAbbr=='PA')
+pr<-subset(obesity, obesity$full.LocationAbbr=='PR')
+ri<-subset(obesity, obesity$full.LocationAbbr=='RI')
+sc<-subset(obesity, obesity$full.LocationAbbr=='SC')
+sd<-subset(obesity, obesity$full.LocationAbbr=='SD')
+tn<-subset(obesity, obesity$full.LocationAbbr=='TN')
+tx<-subset(obesity, obesity$full.LocationAbbr=='TX')
+ut<-subset(obesity, obesity$full.LocationAbbr=='UT')
+va<-subset(obesity, obesity$full.LocationAbbr=='VA')
+vi<-subset(obesity, obesity$full.LocationAbbr=='VI')
+vt<-subset(obesity, obesity$full.LocationAbbr=='VT')
+wa<-subset(obesity, obesity$full.LocationAbbr=='WA')
+wi<-subset(obesity, obesity$full.LocationAbbr=='WI')
+wv<-subset(obesity, obesity$full.LocationAbbr=='WV')
+wy<-subset(obesity, obesity$full.LocationAbbr=='WY')
+
+#Removing missing values
+wy2<-wy[-c(45),]
+View(wy2)
+dc2<-dc[-c(14,19,32,40,45),]
+View(dc2)
+vt2<-vt[-c(4),]
+tn2<-tn[-c(3,9, 25),]
+View(tn2)
+nh2<-nh[-c(7, 21, 31),]
+View(ms)
+ms2<-ms[-c(49, 32, 26),]
+View(ms2)
+hi2<-hi[-c(45, 26),]
+View(hi2)
+de2<-de[-c(35, 30, 23, 20, 19),]
+View(de2)
+ct2<-ct[-c(5),]
+View(ct2)
+
+#Averages by state
+akavg<-sum(ak$full.Data_Value)/55
+alavg<-sum(al$full.Data_Value)/55
+aLavg<-sum(aL$full.Data_Value)/55
+aravg<-sum(ar$full.Data_Value)/55
+azavg<-sum(az$full.Data_Value)/55
+caavg<-sum(ca$full.Data_Value)/55
+coavg<-sum(co$full.Data_Value)/55
+ctavg<-sum(ct$full.Data_Value)/55
+dcavg<-sum(dc$full.Data_Value)/55
+deavg<-sum(de$full.Data_Value)/55
+flavg<-sum(fl$full.Data_Value)/55
+gaavg<-sum(ga$full.Data_Value)/55
+guavg<-sum(gu$full.Data_Value)/55
+hiavg<-sum(hi$full.Data_Value)/55
+iaavg<-sum(ia$full.Data_Value)/55
+idavg<-sum(id$full.Data_Value)/55
+ilavg<-sum(il$full.Data_Value)/55
+indiavg<-sum(indi$full.Data_Value)/55
+meavg<-sum(me$full.Data_Value)/55
+mdavg<-sum(md$full.Data_Value)/55
+maavg<-sum(ma$full.Data_Value)/55
+laavg<-sum(la$full.Data_Value)/55
+kyavg<-sum(ky$full.Data_Value)/55
+ksavg<-sum(ks$full.Data_Value)/55
+miavg<-sum(mi$full.Data_Value)/55
+mnavg<-sum(mn$full.Data_Value)/55
+moavg<-sum(mo$full.Data_Value)/55
+msavg<-sum(ms$full.Data_Value)/55
+mtavg<-sum(mt$full.Data_Value)/55
+ncavg<-sum(nc$full.Data_Value)/55
+ndavg<-sum(nd$full.Data_Value)/55
+ndavg<-sum(ne$full.Data_Value)/55
+ndavg<-sum(nd$full.Data_Value)/55
+neavg<-sum(ne$full.Data_Value)/55
+nhavg<-sum(nh$full.Data_Value)/55
+njavg<-sum(nj$full.Data_Value)/55
+nmavg<-sum(nm$full.Data_Value)/55
+nvavg<-sum(nv$full.Data_Value)/55
+nyavg<-sum(ny$full.Data_Value)/55
+ohavg<-sum(oh$full.Data_Value)/55
+okavg<-sum(ok$full.Data_Value)/55
+oravg<-sum(or$full.Data_Value)/55
+paavg<-sum(pa$full.Data_Value)/55
+pravg<-sum(pr$full.Data_Value)/55
+riavg<-sum(ri$full.Data_Value)/55
+scavg<-sum(sc$full.Data_Value)/55
+sdavg<-sum(sd$full.Data_Value)/55
+tnavg<-sum(tn$full.Data_Value)/55
+txavg<-sum(tx$full.Data_Value)/55
+utavg<-sum(ut$full.Data_Value)/55
+utavg<-sum(va$full.Data_Value)/55
+utavg<-sum(ut$full.Data_Value)/55
+vaavg<-sum(va$full.Data_Value)/55
+viavg<-sum(vi$full.Data_Value)/55
+vtavg<-sum(vt$full.Data_Value)/55
+waavg<-sum(wa$full.Data_Value)/55
+wiavg<-sum(wi$full.Data_Value)/55
+wvavg<-sum(wv$full.Data_Value)/55
+wyavg<-sum(wy$full.Data_Value)/55
+ctavg<-sum(ct2$full.Data_Value)/54
+dcavg<-sum(dc2$full.Data_Value)/50
+deavg<-sum(de2$full.Data_Value)/50
+hiavg<-sum(hi2$full.Data_Value)/53
+msavg<-sum(ms2$full.Data_Value)/52
+nhavg<-sum(nh2$full.Data_Value)/52
+tnavg<-sum(tn2$full.Data_Value)/52
+wyavg<-sum(wy2$full.Data_Value)/54
+vtavg<-sum(vt2$full.Data_Value)/54
+
+#Separating states by region
+southavg<-sum(txavg,okavg,aravg,laavg,msavg,aLavg,tnavg,kyavg,wvavg,mdavg,deavg,vaavg,ncavg,scavg,gaavg,flavg)/16
+northeastavg<-sum(meavg,nhavg,vtavg,nyavg,paavg,njavg,ctavg,riavg,maavg)/9
+southeastavg<-sum(wvavg,kyavg,vaavg,tnavg,ncavg,scavg,gaavg,aLavg,msavg,aravg,laavg,flavg)/12
+southwestavg<-sum(txavg,okavg,nmavg,azavg)/4
+westavg2<-sum(coavg,wyavg,mtavg,idavg,waavg,oravg,utavg,caavg,nvavg,akavg,hiavg)/11northeastavg<-sum(meavg,maavg,riavg,ctavg,nhavg,vtavg,nyavg,paavg,njavg,deavg,mdavg)/11
+midwestavg<-sum(ohavg,indiavg,miavg,ilavg,moavg,wiavg,mnavg,iaavg,ksavg,neavg,sdavg,ndavg)/12
+
+#Pie chart per region
+regions<- c(westavg2, southeastavg, southwestavg, northeastavg, midwestavg)
+barplot(regions)
+lables<- c("West", "Southeast", "Southwest", "Northeast", "Midwest")
+pie(regions, labels = lables, main="Percentages per Region")
+
